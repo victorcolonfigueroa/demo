@@ -1,5 +1,6 @@
 export type Recipe = {
   id: string;
+  creator_id: string;
   title: string;
   slug: string;
   description: string;
