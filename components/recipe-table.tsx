@@ -4,18 +4,18 @@ import { getRecipe, getRecipes } from "@/app/actions/recipes";
 import React, { useEffect, useState } from "react";
 
 const RecipeTable = () => {
-  //   const [title, setTitle] = useState("");
-  //   const [description, setDescription] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
   // fetch only one recipe
-  //   const [recipe, setRecipe] = useState({
-  //     id: "d77c773d-ae69-4b3f-8965-b21951b80e44",
-  //     title: "",
-  //     description: "",
-  //     instructions: [],
-  //     ingredients: [],
-  //     photos: [],
-  //   });
+    const [recipe, setRecipe] = useState({
+      id: "d77c773d-ae69-4b3f-8965-b21951b80e44",
+      title: "",
+      description: "",
+      instructions: [],
+      ingredients: [],
+      photos: [],
+    });
 
   const [recipes, setRecipes] = useState([
     {
@@ -29,13 +29,13 @@ const RecipeTable = () => {
   ]);
 
   useEffect(() => {
-    // const fetchRecipe = async () => {
-    //   const recipeData = await getRecipe(recipe.id);
-    //   console.log(recipeData);
-    //   setRecipe(recipeData);
-    // };
+    const fetchRecipe = async () => {
+      const recipeData = await getRecipe(recipe.id);
+      console.log(recipeData);
+      setRecipe(recipeData);
+    };
 
-    // fetchRecipe();
+    fetchRecipe();
 
     const fetchRecipes = async () => {
       const recipesData = await getRecipes();
@@ -59,7 +59,7 @@ const RecipeTable = () => {
           </tr>
         </thead>
         <tbody>
-          {/* <tr>
+          <tr>
             <td>{recipe.title}</td>
             <td>{recipe.description}</td>
             <td>
@@ -84,10 +84,10 @@ const RecipeTable = () => {
                   ))}
               </ul>
             </td>
-          </tr> */}
+          </tr>
           {recipes.map((recipe) => (
             <tr key={recipe.id}>
-              {/* <td className="truncate text-wrap max-w-16 ">{recipe.id}</td> */}
+              <td className="truncate text-wrap max-w-16 ">{recipe.id}</td>
               <td>{recipe.title}</td>
               <td>{recipe.description}</td>
               <td>
