@@ -4,9 +4,9 @@
 // fetchAll
 // const {data:note} = await supabase.from("notes").select().eq(id)
 "use server";
-
 import { createClient } from "@/utils/supabase/client";
 import { getSession } from "../actions";
+import { Recipe } from "@/lib/props/types";
 
 const supabase = createClient();
 
@@ -30,18 +30,29 @@ export async function createRecipe(recipe: {
   return data;
 }
 
-export async function getRecipes() {
+export async function getRecipes(): Promise<Recipe[] | null> {
   const { data, error } = await supabase.from("recipes").select("*");
 
   if (error) throw error;
   return data;
 }
-
-export async function getRecipe(id: string) {
+export async function getRecipebyId(id: string): Promise<Recipe | null> {
   const { data, error } = await supabase
     .from("recipes")
     .select("*")
     .eq("id", id)
+    .single();
+
+  if (error) throw console.log(error);
+
+  return data;
+}
+
+export async function getRecipebySlug(slug: string): Promise<Recipe | null> {
+  const { data, error } = await supabase
+    .from("recipes")
+    .select("*")
+    .eq("slug", slug)
     .single();
 
   if (error) throw console.log(error);

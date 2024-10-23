@@ -3,8 +3,8 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/sign-in',
+        source: "/",
+        destination: "/",
         permanent: true, // Set to true if this is a permanent redirect
       },
     ];
