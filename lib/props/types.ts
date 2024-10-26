@@ -6,7 +6,7 @@ export type Recipe = {
   description: string;
   instructions: string[];
   ingredients: string[];
-  photo: string;
+  photos: string[];
   tags: string[];
   prepTime: number;
   cookTime: number;

@@ -77,7 +77,7 @@ export async function updateRecipe(
     .from("recipes")
     .update(recipe)
     .eq("id", id)
-    .eq("creator_id", session.user.id)
+    .eq("creator_id", session.auth.getUser().then((user) => user.data.user?.id))
     .select()
     .single();
 

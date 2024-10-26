@@ -1,5 +1,5 @@
 import Hero from "@/components/hero";
-import RecipeTable from "@/components/recipe-table";
+import RecipeTable from "@/components/recipe-list";
 import Link from "next/link";
 
 export default async function Index() {

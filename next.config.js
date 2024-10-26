@@ -1,12 +1,17 @@
-// next.config.js
 module.exports = {
-  async redirects() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: "/",
-        destination: "/",
-        permanent: true, // Set to true if this is a permanent redirect
+        protocol: 'https',
+        hostname: 'jnvhwefbrgyjjwoocnnz.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/sign/comida/**',
+      },{
+        protocol: 'https',
+        hostname: 'jnvhwefbrgyjjwoocnnz.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/comida/**',
       },
-    ];
+    ],
   },
-};
+}
