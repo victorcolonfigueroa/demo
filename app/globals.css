@@ -30,6 +30,13 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
   }
+  .Light{
+    --text: hsl(60, 3%, 7%);
+    --background: hsl(60, 20%, 99%);
+    --primary: hsl(35, 23%, 53%);
+    --secondary: hsl(33, 32%, 70%);
+    --accent: hsl(33, 43%, 61%);
+  }
 
   .dark {
     --background: 0 0% 3.9%;

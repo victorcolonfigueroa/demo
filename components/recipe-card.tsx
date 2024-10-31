@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import Loader from "./common/loader";
 import Back from "./common/back";
 import Image from "next/image";
+import { Edit } from "lucide-react";
+// import EditableData from "./common/edit";
 interface RecipeCardProps {
   slug: string;
 }
@@ -90,12 +92,14 @@ const RecipeCard = ({ slug }: RecipeCardProps) => {
               <strong>Calories:</strong> {recipe.calories}
             </span>
           </div>
+          {/* <EditableData />
+            <Edit className="w-6 h-6 text-yellow-600" /> */}
 
           <div className="mt-4">
             {recipe.tags?.map((tag) => (
               <span
-                key={tag}
-                className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2"
+              key={tag}
+              className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2"
               >
                 #{tag}
               </span>

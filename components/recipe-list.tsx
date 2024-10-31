@@ -6,6 +6,7 @@ import { Recipe } from "@/lib/props/types";
 import RecipeLoader from "./common/recipeLoader";
 import Loader from "./common/loader";
 import Link from "next/link";
+// import AddRecipe from "./common/add";
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
@@ -34,8 +35,8 @@ const RecipeList = () => {
     );
   return (
     <div>
-      <h1 className="text-3xl text-yellow-600">Recipe List</h1>
-      <ul className="w-full">
+      <h1 className="text-5xl text-yellow-600">Recipe List</h1>
+      <ul className="w-full text-3xl">
         {recipes ? (
           recipes.map((recipe) => (
             <li key={recipe.id}>
@@ -48,6 +49,13 @@ const RecipeList = () => {
           </li>
         )}
       </ul>
+      {/* <div className="flex justify-between items-center">
+      <Link href="/new-recipe">
+        <button className="bg-yellow-600 text-white px-4 py-2 rounded-lg mt-4">
+          Add Recipe
+        </button>
+      </Link>
+        </div> */}
     </div>
   );
 };

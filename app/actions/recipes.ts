@@ -1,8 +1,4 @@
-//basic supabase fetch func
-//crud- post, get, get all, edit,  delete
-// //const { data: notes } = await supabase.from("notes").select();
-// fetchAll
-// const {data:note} = await supabase.from("notes").select().eq(id)
+
 "use server";
 import { createClient } from "@/utils/supabase/client";
 import { getSession } from "../actions";
