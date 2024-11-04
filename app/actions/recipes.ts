@@ -2,7 +2,6 @@
 "use server";
 import { createClient } from "@/utils/supabase/client";
 import { getSession } from "../actions";
-import { Recipe } from "@/lib/props/types";
 
 const supabase = createClient();
 
@@ -89,3 +88,28 @@ export async function searchRecipes(query: string) {
   if (error) throw error;
   return data;
 }
+
+
+// Ensure this file exports the addRecipe function
+
+// Example content of recipes.ts
+
+import { Recipe } from "@/lib/props/types";
+
+export const addRecipe = async (recipeData: Recipe) => {
+
+  // Implementation for adding a recipe
+
+  // This is just a placeholder. Replace with actual implementation.
+
+  console.log("Recipe added:", recipeData);
+
+};
+
+
+
+export const someOtherFunction = () => {
+
+  // some code
+
+};

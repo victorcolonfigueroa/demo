@@ -1,48 +1,63 @@
+// pages/edit-recipe/[slug].tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { addRecipe } from "@/app/actions/recipes"; // Make sure this function is defined to handle adding recipes
+import { getRecipebySlug, updateRecipe } from "@/app/actions/recipes"; // Ensure these functions are defined
+import { Recipe } from "@/lib/props/types";
 
-const AddRecipe = () => {
+const EditRecipe = () => {
+  const router = useRouter();
+  const { slug } = router.query; // Get the recipe slug from the URL
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
-  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
-  const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      if (slug) {
+        const recipeData = await getRecipebySlug(slug as string);
+        setRecipe(recipeData);
+        if (recipeData) {
+          setTitle(recipeData.title);
+          setIngredients(recipeData.ingredients.join(", "));
+          setInstructions(recipeData.instructions.join("\n"));
+        }
+      }
+    };
+
+    fetchRecipe();
+  }, [slug]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
-    // Basic validation
     if (!title || !ingredients || !instructions) {
       setError("Please fill in all fields.");
       return;
     }
 
     try {
-      // Prepare the recipe data
-      const recipeData = {
+      await updateRecipe(slug as string, {
         title,
         ingredients: ingredients.split(",").map((ingredient) => ingredient.trim()),
-        instructions,
-        image,
-      };
-
-      // Call the function to add the recipe
-      await addRecipe(recipeData);
-      router.push("/"); // Redirect to the main page or recipe list after adding
+        instructions: instructions.split("\n"),
+      });
+      router.push(`/recipes/${slug}`); // Redirect after successful update
     } catch (err) {
       console.error(err);
-      setError("Failed to add recipe. Please try again.");
+      setError("Failed to update recipe. Please try again.");
     }
   };
 
+  if (!recipe) return <div>Loading...</div>;
+
   return (
     <div className="max-w-md mx-auto mt-10 p-4 border rounded shadow-lg">
-      <h1 className="text-2xl font-bold mb-4">Add a New Recipe</h1>
+      <h1 className="text-2xl font-bold mb-4">Edit Recipe</h1>
       {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -75,7 +90,7 @@ const AddRecipe = () => {
 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1" htmlFor="instructions">
-            Instructions
+            Instructions (one per line)
           </label>
           <textarea
             id="instructions"
@@ -87,25 +102,12 @@ const AddRecipe = () => {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1" htmlFor="image">
-            Image (optional)
-          </label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="border rounded w-full px-3 py-2"
-          />
-        </div>
-
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Add Recipe
+          Update Recipe
         </button>
       </form>
     </div>
   );
 };
 
-export default AddRecipe;
+export default EditRecipe;
